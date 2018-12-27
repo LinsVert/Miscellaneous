@@ -18,11 +18,14 @@ use Illuminate\Support\Facades\Facade;
  * @method static get($url, $fields = [], $allow_redirects = true)
  * @method static post($url, $fields = [], $files = [], $allow_redirects = true)
  * @method static set_timeout($timeout)
+ * @method static set_header($key, $value)
  * @method static set_useragent($useragent)
  * @method static set_referer($referer)
  * @method static getResponeCode()
  * @method static get_error()
  * @method static set_error($error = '')
+ * @method static get_cookies($domain = '')
+ * @method static set_proxy($proxy = '')
  */
 class Curl extends Facade
 {
