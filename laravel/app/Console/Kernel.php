@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        //ccvt register
+        Commands\Spider\Ccvt::class,
     ];
 
     /**
@@ -24,8 +25,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        //ccvt 自动注册脚本
+        //$schedule->command('ccvt:register start')->everyThirtyMinutes()->timezone('Asia/Shanghai')->between("9:00", "24:00")->withoutOverlapping()->appendOutputTo(storage_path('logs/ccvt-' . date("Y-m-d") . '.log'));
     }
 
     /**
