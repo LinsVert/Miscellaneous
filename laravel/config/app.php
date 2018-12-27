@@ -174,6 +174,10 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        //curl请求类
+        App\Providers\CurlServiceProvider::class,
+        //html选择器
+        App\Providers\SelectorServiceProvider::class,
 
     ],
 
@@ -223,6 +227,11 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        //门面注册
+        //请求类
+        'Curl' => App\Facades\Curl::class,
+        //html选择器
+        'Selector' => App\Facades\Selector::class,
 
     ],
 
