@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
         //ccvt 自动注册脚本
         //$schedule->command('ccvt:register start')->everyThirtyMinutes()->timezone('Asia/Shanghai')->between("9:00", "24:00")->withoutOverlapping()->appendOutputTo(storage_path('logs/ccvt-' . date("Y-m-d") . '.log'));
         //自动提交脚本
-        $schedule->command('autoCommit:github')->daily()->timezone('Asia/Shanghai')->withoutOverlapping()->appendOutputTo(storage_path('logs/commit-' . date("Y-m-d") . '.log'));
+        $schedule->command('autoCommit:github')->everyMinute()->timezone('Asia/Shanghai')->withoutOverlapping()->appendOutputTo(storage_path('logs/commit-' . date("Y-m-d") . '.log'));
     }
 
     /**
