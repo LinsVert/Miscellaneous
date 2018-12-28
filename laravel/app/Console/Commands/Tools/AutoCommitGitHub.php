@@ -51,7 +51,7 @@ class AutoCommitGitHub extends Command
         if (!$status) {
             echo "提交成功！" . PHP_EOL;
             $out = implode('</br>', $out);
-            (new Mail(env('MAIL_USERNAME'), env('MAIL_PASSWORD'), env('MAIL_HOST'), 465, 'ssl'))->sendMail(env('MAIL_FROM'), 'system', env('MAIL_TO'), 'lins', "github自动提交", $out, true);
+            (new Mail(env('MAIL_USERNAME'), env('MAIL_PASSWORD'), env('MAIL_HOST'), 465, 'ssl'))->sendMail(env('MAIL_FROM'), 'system', env('MAIL_TO'), 'admin', "github自动提交", $out, true);
         }
     }
 }
