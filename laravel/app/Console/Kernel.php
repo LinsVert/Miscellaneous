@@ -15,6 +15,8 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         //ccvt register
         Commands\Spider\Ccvt::class,
+        //自动提交
+        Commands\Tools\AutoCommitGitHub::class,
     ];
 
     /**
