@@ -37,6 +37,17 @@ class AutoCommitGitHub extends Command
      */
     public function handle()
     {
-       echo app_path('');
+        date_default_timezone_set("Asia/Shanghai");
+        $now = date('Y-m-d H:i:s');
+        $file = base_path('autoCommitGithub.log');
+        if (!file_exists($file)) {
+            file_put_contents($file, '第一次提交，新建文件!Time:' . $now . PHP_EOL);
+        }
+        file_put_contents($file, "自动提交。时间：" . $now . PHP_EOL, FILE_APPEND);
+        $command = "git pull && git status &&  git add -A && git commit -a -m " . "'默认提交{$now}' && git push";
+        $status = 1;
+        exec($command, $out, $status);
+        var_dump($out);
+        var_dump($status);
     }
 }
