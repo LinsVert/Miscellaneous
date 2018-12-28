@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands\Tools;
 
+use App\Libraries\Mail;
 use Illuminate\Console\Command;
 
 class AutoCommitGitHub extends Command
@@ -47,7 +48,10 @@ class AutoCommitGitHub extends Command
         $command = "git pull && git status &&  git add -A && git commit -a -m " . "'默认提交{$now}' && git push";
         $status = 1;
         exec($command, $out, $status);
-        var_dump($out);
-        var_dump($status);
+        if (!$status) {
+            echo "提交成功！" . PHP_EOL;
+            $out = implode('</br>', $out);
+            (new Mail(env('MAIL_USERNAME'), env('MAIL_PASSWORD'), env('MAIL_HOST'), 465, 'ssl'))->sendMail(env('MAIL_FROM'), 'system', env('MAIL_TO'), 'lins', "github自动提交", $out, true);
+        }
     }
 }
