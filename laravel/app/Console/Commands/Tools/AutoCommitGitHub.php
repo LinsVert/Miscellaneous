@@ -45,7 +45,7 @@ class AutoCommitGitHub extends Command
             file_put_contents($file, '第一次提交，新建文件!Time:' . $now . PHP_EOL);
         }
         file_put_contents($file, "自动提交。时间：" . $now . PHP_EOL, FILE_APPEND);
-        $command = "git pull && git status &&  git add autoCommitGithub.log && git commit -a -m " . "'默认提交{$now}' && git push";
+        $command = "/usr/local/git/bin/git pull && /usr/local/git/bin/git status &&  /usr/local/git/bin/git add autoCommitGithub.log && /usr/local/git/bin/git commit -a -m " . "'默认提交{$now}' && /usr/local/git/bin/git push";
         $status = 1;
         exec($command, $out, $status);
         if (!$status) {
