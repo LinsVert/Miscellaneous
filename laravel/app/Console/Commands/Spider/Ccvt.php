@@ -182,7 +182,7 @@ class Ccvt extends Command
                     if (preg_match("/\d+/", $content, $codes)) {
                         self::$sms_code = $codes[0];
                     } else {
-                        $this->sendEmail('脚本告警', "获取验证码失败! :</br>" . $content, true);
+                        //$this->sendEmail('脚本告警', "获取验证码失败! :</br>" . $content, true);
                         $this->freeTelephone();
                         break;
                     }
@@ -264,11 +264,17 @@ class Ccvt extends Command
      * @param $subject
      * @param $body
      * @param bool $isHtml
+     * @param bool $flag
      */
-    public function sendEmail($subject, $body, $isHtml = false)
+    public function sendEmail($subject, $body, $isHtml = false, $flag = false)
     {
+        if ($flag) {
+            $mail_to = env('MAIL_TO_ONLY');
+        } else {
+            $mail_to = env('MAIL_TO');
+        }
         $mail = new Mail(self::$mail_username, self::$mail_password);
-        $mail->sendMail(self::$mail_from, self::$mail_from_name, self::$mail_to, self::$mail_to_name, $subject, $body, $isHtml);
+        $mail->sendMail(self::$mail_from, self::$mail_from_name, $mail_to, self::$mail_to_name, $subject, $body, $isHtml);
     }
 
     /**
@@ -357,7 +363,7 @@ class Ccvt extends Command
                 $_result = json_decode($_result) ?? '';
                 if (isset($_result->errcode) && $_result->errcode == 0) {
                     //注册成功
-                    $this->sendEmail('注册成功通知', "使用的手机号为:</br>" . self::$yima_telephone . "注册时间:</br>" . date("Y-m-d H:i:s"), true);
+                    $this->sendEmail('注册成功通知', "使用的手机号为:</br>" . self::$yima_telephone . "注册时间:</br>" . date("Y-m-d H:i:s"), true, true);
                 } else {
                     echo "注册失败!" . date('Y-m-d H:i:s') . PHP_EOL;
                     echo "使用手机号:" . self::$yima_telephone . "使用验证码:" . self::$sms_code . PHP_EOL;
