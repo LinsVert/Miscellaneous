@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         //ccvt 自动注册脚本
-        $schedule->command('ccvt:register start')->everyThirtyMinutes()->timezone('Asia/Shanghai')->withoutOverlapping()->appendOutputTo(storage_path('logs/ccvt-' . date("Y-m-d") . '.log'));
+        //$schedule->command('ccvt:register start')->everyThirtyMinutes()->timezone('Asia/Shanghai')->withoutOverlapping()->appendOutputTo(storage_path('logs/ccvt-' . date("Y-m-d") . '.log'));
         //自动提交脚本
         $schedule->command('autoCommit:github')->daily()->timezone('Asia/Shanghai')->withoutOverlapping()->appendOutputTo(storage_path('logs/commit-' . date("Y-m-d") . '.log'));
     }
