@@ -16,3 +16,6 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//添加微信公众平台路由
+Route::any('/wx',"Api\Wechat\WechatController@init");
