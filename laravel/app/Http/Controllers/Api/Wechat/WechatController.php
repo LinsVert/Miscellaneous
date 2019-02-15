@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Wechat;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redis;
 
 class WechatController extends Controller
 {   
@@ -112,8 +113,8 @@ class WechatController extends Controller
                 ]
             ],
             'userInfo' => [
-                'apiKey' => self::ROBOT['userinfo'],
-                'userId' => self::ROBOT['userinfoId'],
+                'apiKey' => self::$ROBOT['userinfo'],
+                'userId' => self::$ROBOT['userinfoId'],
                 'groupId' => $openId,
             ]
         ];
@@ -125,7 +126,7 @@ class WechatController extends Controller
             $data['reqType'] = 1;
         }
         Log::debug('测试发送数据', $data);
-        $result = self::curlSimple(self::ROBOT['tuApi'], 'post', json_encode($data));
+        $result = self::curlSimple(self::$ROBOT['tuApi'], 'post', json_encode($data));
         Log::info('post result' . $result);
         $result = json_decode($result, true);
         $msg = $result['results'][0]['values'];
@@ -197,6 +198,10 @@ class WechatController extends Controller
         return sprintf('<![CDATA[%s]]>', $string);
     }
 
+    /**
+     * @param $xml
+     * @param $keyword
+     */
     private function checkKeyWord($xml, $keyword)
     {
         Redis::select(1);
