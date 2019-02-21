@@ -245,7 +245,7 @@ class WechatController extends Controller
         switch ($flag['type']) {
             case self::StepConfig[0] :
             //music relation
-                if ($flag == 1) {
+                if ($flag['step'] == 1) {
                     $msg = '请输入第二个用户的ID或昵称';
                     Redis::setex(self::StepConfig[0] . $xml->FromUserName, 300, 2);
                     Redis::setex(self::StepConfig[0] . $xml->FromUserName . '_name', 300, $xml->Content);
@@ -258,7 +258,8 @@ class WechatController extends Controller
                     } else {
                         $msg = '输入超时了哦';
                     }
-                    
+                    Redis::del(self::StepConfig[0] . $xml->FromUserName . '_name');
+                    Redis::del(self::StepConfig[0] . $xml->FromUserName);
                 }
                 break;
             default:
