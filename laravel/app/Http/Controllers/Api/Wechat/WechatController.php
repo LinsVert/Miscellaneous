@@ -219,7 +219,7 @@ class WechatController extends Controller
         Redis::select(1);
         $step = $this->getUserStep($xml->FromUserName);
         if (!$step) {
-            switch($keyWord){
+            switch($keyword){
                 case '音缘':
                     Redis::setex(self::StepConfig[0] . $xml->FromUserName, 300, 1);
                     $msg = "请输入一个昵称(有效时间5分钟)";
