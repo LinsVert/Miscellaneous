@@ -229,6 +229,7 @@ class WechatController extends Controller
                 break;
                 case "菜单":
                     $msg = self::menus;
+                break;
                 default:
                     $msg = '';
                 break;
@@ -254,7 +255,7 @@ class WechatController extends Controller
                     $relationRate = $this->relationActivity($xml->FromUserName, $first, $second);
                     if ($relationRate) {
                         $msg = '你们之间的相识度为' . $relationRate;
-                    }else {
+                    } else {
                         $msg = '输入超时了哦';
                     }
                     
