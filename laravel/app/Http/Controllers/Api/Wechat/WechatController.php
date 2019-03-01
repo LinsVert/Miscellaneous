@@ -15,7 +15,9 @@ class WechatController extends Controller
         'userinfo' => '',
         'userinfoId' => ''
     ];
-    const MUSICLIKE = "";
+    const MUSICLIKE = [
+        'search' => "https://music.163.com/#/search/m/?s=%s&type=1002"
+    ];
 
     //步骤记录
     const StepConfig = [
@@ -268,8 +270,9 @@ class WechatController extends Controller
         }
         return $msg;
     }
-    protected function relationActivity($openId)
+    protected function relationActivity($openId, $firstName , $secondName) 
     {
+        //get
         $relationRate = rand(0, 100);
         return $relationRate . '%';
     }
