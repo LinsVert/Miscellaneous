@@ -17,6 +17,8 @@ class Kernel extends ConsoleKernel
         Commands\Spider\Ccvt::class,
         //自动提交
         Commands\Tools\AutoCommitGitHub::class,
+        
+        Commands\Test::class,
     ];
 
     /**

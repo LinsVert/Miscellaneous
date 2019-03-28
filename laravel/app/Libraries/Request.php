@@ -8,10 +8,12 @@
 
 namespace App\Libraries;
 
+use App\Utils\Singleton;
 
 class Request
 {
-    const VERSION = '2.0.0';
+    use Singleton;
+    const VERSION = '2.0.1';
 
     protected static $ch = null;
 
