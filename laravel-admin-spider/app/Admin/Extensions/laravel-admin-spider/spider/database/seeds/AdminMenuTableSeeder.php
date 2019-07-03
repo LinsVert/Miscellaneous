@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class AdminMenuSeeder extends Seeder
+class AdminMenuTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,8 +11,6 @@ class AdminMenuSeeder extends Seeder
      */
     public function run()
     {
-        //用于新增menu
-        $model = config('admin.database.menu_model');
-        //todo
+        //
     }
 }
