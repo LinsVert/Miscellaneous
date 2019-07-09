@@ -7,10 +7,12 @@ use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Illuminate\Routing\Controller;
 use Linsvert\Spider\Http\Models\SpiderModel;
+use Encore\Admin\Controllers\HasResourceActions;
 
 class SpiderController extends Controller
 {
-    // use HasResource;
+    use HasResourceActions;
+
     protected $type = [
         'xpath' => 'xpath',
         'regex' => 'regex',
@@ -24,9 +26,17 @@ class SpiderController extends Controller
             ->description('Description')
             ->body($this->grid());
     }
-    public function grid() {
+    public function grid()
+    {
         $grid = new Grid(new SpiderModel);
         return $grid;
+    }
+    public function edit($id, Content $content)
+    {
+        return $content
+        ->header('Edit')
+        ->description('edit')
+        ->body($this->form()->edit($id));
     }
     public function create(Content $content)
     {
