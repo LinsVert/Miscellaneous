@@ -18,6 +18,10 @@ class SpiderServiceProvider extends ServiceProvider
         if ($views = $extension->views()) {
             $this->loadViewsFrom($views, 'spider');
         }
+         //数据迁移
+         if ($migrations = $extension->migrations()) {
+            $this->loadMigrationsFrom($migrations);
+        }
 
         if ($this->app->runningInConsole() && $assets = $extension->assets()) {
             $this->publishes(

@@ -12,9 +12,11 @@ class Spider extends Extension
 
     public $assets = __DIR__.'/../resources/assets';
 
+    public $migrations = __DIR__.'/../database/migrations';
+
     public $menu = [
         'title' => 'Spider',
-        'path'  => 'spider',
+        'path'  => 'linsvert/spider',
         'icon'  => 'fa-gears',
     ];
 }
