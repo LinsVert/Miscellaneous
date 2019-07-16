@@ -8,4 +8,9 @@ class TaskModel extends Model
     //laravel-admin-spider task model
     protected $table = 'spider_task';
     
+    public function spider()
+    {
+        return $this->hasOne(SpiderModel::class, 'spider_id', 'id');
+    }
+    
 }

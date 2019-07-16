@@ -8,6 +8,7 @@
         "php": "^7.1.3",
         "encore/laravel-admin": "^1.7",
         "fideloper/proxy": "^4.0",
+        "jonnyw/php-phantomjs": "@dev",
         "laravel-admin-spider/spider": "dev-master",
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0"
@@ -49,12 +50,19 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
+        ],
+        "post-install-cmd": [
+            "PhantomInstaller\\Installer::installPhantomJS"
+        ],
+        "post-update-cmd": [
+            "PhantomInstaller\\Installer::installPhantomJS"
         ]
     },
     "config": {
         "preferred-install": "dist",
         "sort-packages": true,
-        "optimize-autoloader": true
+        "optimize-autoloader": true,
+        "bin-dir": "bin"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

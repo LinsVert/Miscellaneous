@@ -6,6 +6,10 @@ use Illuminate\Support\ServiceProvider;
 
 class SpiderServiceProvider extends ServiceProvider
 {
+    protected $commands = [
+        \Linsvert\Spider\Console\TaskCommand::class,
+        \Linsvert\Spider\Console\TestCommand::class,
+    ];
     /**
      * {@inheritdoc}
      */
@@ -30,6 +34,9 @@ class SpiderServiceProvider extends ServiceProvider
             );
         }
 
+        if ($this->app->runningInConsole()) {
+            $this->commands($this->commands);
+        }
         $this->app->booted(function () {
             Spider::routes(__DIR__.'/../routes/web.php');
         });

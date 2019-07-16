@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f018937d74382922d21d7ff17cfe40f0",
+    "content-hash": "ecd3886844399d17edcc7ffa732994c0",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -844,6 +844,60 @@
             ],
             "description": "Highlight PHP code in terminal",
             "time": "2018-09-29T18:48:56+00:00"
+        },
+        {
+            "name": "jonnyw/php-phantomjs",
+            "version": "v2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jonnnnyw/php-phantomjs.git",
+                "reference": "a88fe560cf79481ff3c997deb223c05f4f37a9b5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jonnnnyw/php-phantomjs/zipball/a88fe560cf79481ff3c997deb223c05f4f37a9b5",
+                "reference": "a88fe560cf79481ff3c997deb223c05f4f37a9b5",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://dl.laravel-china.org/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "bin": [
+                "bin/phantomjs"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "JonnyW\\PhantomJs\\": "src"
+                },
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonny Wenmoth",
+                    "email": "contact@jonnyw.me",
+                    "homepage": "http://jonnyw.me/"
+                }
+            ],
+            "description": "A PHP wrapper for loading pages through PhantomJS",
+            "keywords": [
+                "Headless Browser",
+                "phantomjs",
+                "testing"
+            ],
+            "time": "2013-11-14T09:37:27+00:00"
         },
         {
             "name": "kylekatarnls/update-helper",
@@ -5409,6 +5463,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "jonnyw/php-phantomjs": 20,
         "laravel-admin-spider/spider": 20
     },
     "prefer-stable": true,

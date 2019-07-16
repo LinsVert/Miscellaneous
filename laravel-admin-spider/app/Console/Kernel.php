@@ -26,6 +26,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        $schedule->command('linsvert:spider')->everyMinute()->runInBackground()->appendOutputTo(storage_path('logs/spider-' . date('Y-m-d') . '.log'));
     }
 
     /**
