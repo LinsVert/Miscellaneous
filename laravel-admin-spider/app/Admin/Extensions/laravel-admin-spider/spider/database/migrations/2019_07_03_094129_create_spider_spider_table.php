@@ -16,17 +16,14 @@ class CreateSpiderSpiderTable extends Migration
         Schema::create('spider_spider', function (Blueprint $table) {
             $table->increments('id');
             //目标url
-            $table->string('spider_name', 255)->default('');
-            $table->string('url', 255)->default('');
-            //列表页规则
-            $table->string('list_type', 20)->default('');
-            $table->string('list_rule', 255)->default('');
-            //详情页规则
-            $table->string('detail_type', 20)->default('');
-            $table->string('detail_rule', 255)->default('');
-            $table->unsignedTinyInteger('proxy')->default(0);
+            $table->string('name', 255)->default('');
+            $table->string('domains', 2000);
+            $table->string('scan_urls', 2000);
+            $table->string('list_url_regexes', 2000);
+            $table->string('content_url_regexes', 2000);
+            $table->string('fields', 2000);
             //相当于深度
-            $table->unsignedInteger('deep')->default(0);
+            $table->unsignedInteger('max_depth')->default(0);
             $table->timestamps();
         });
     }

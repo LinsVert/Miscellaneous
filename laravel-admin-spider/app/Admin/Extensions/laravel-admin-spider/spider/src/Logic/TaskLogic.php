@@ -13,8 +13,17 @@ class TaskLogic
         //基本逻辑
         //fork 出n个子进程用于计划调度
         $taskModel = TaskModel::where('loop_times', 1)->where('times', 0)->orWhere('loop_times', '>', 1)->get();
+        //如果是爬虫类重复任务 如爬取个网页 的图片 那么 重复任务的调度问题 需要解决(比如任务已经在跑了) 是否 重复跑的问题
         if ($taskModel) {
+            $exec = "ps -aux | grep 'Linsvert task process child process php %s'";
             foreach ($taskModel as $key => $value) {
+                if ($value->withoutOverlapping == 1) {
+                    exec(sprintf($exec, $value->id), $_pid);
+                    //如果子进程还在运行 则不运行
+                    if (count($_pid) > 1) {
+                        continue;
+                    }
+                }
                 $pid = pcntl_fork();
                 if ($pid == -1) {
                     echo 'fork error' . PHP_EOL;
@@ -28,6 +37,7 @@ class TaskLogic
                     cli_set_process_title('Linsvert task process php ' . $value->id);
                 }
             }
+
 
             while (pcntl_waitpid(0, $status) != -1) { 
                 $status = pcntl_wexitstatus($status); 

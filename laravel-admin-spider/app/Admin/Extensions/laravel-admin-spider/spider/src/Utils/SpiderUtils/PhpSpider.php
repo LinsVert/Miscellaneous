@@ -409,12 +409,13 @@ class PhpSpider
         // 彩蛋
         $included_files = get_included_files();
         $content = file_get_contents($included_files[0]);
-        if (!preg_match("#/\* Do NOT delete this comment \*/#", $content) || !preg_match("#/\* 不要删除这段注释 \*/#", $content))
-        {
-            $msg = "Unknown error...";
-            Log::error($msg);
-            exit;
-        }
+        
+        // if (!preg_match("#/\* Do NOT delete this comment \*/#", $content) || !preg_match("#/\* 不要删除这段注释 \*/#", $content))
+        // {
+        //     $msg = "Unknown error...";
+        //     Log::error($msg);
+        //     exit;
+        // }
 
         $configs['name']        = isset($configs['name'])        ? $configs['name']        : 'phpspider';
         $configs['proxy']       = isset($configs['proxy'])       ? $configs['proxy']       : false;
