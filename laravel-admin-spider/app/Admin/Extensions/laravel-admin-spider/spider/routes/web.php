@@ -11,7 +11,7 @@ Route::group([
     //添加Spider
     $router::resource('spider', 'SpiderController');
     //添加task
-    $router::resource('task', 'SpiderController');
+    $router::resource('task', 'TaskController');
     //添加proxy
     $router::resource('proxy', 'SpiderController');
 

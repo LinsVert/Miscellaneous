@@ -30,6 +30,7 @@ class SpiderController extends Controller
     public function grid()
     {
         $grid = new Grid(new SpiderModel);
+        $grid->name('Spider Name');
         return $grid;
     }
     public function edit($id, Content $content)
@@ -55,8 +56,8 @@ class SpiderController extends Controller
         $form->tab('Base config', function ($form) {
             $form->text('name', 'SpiderName')->rules('required');
             $form->number('tasknum', 'TaskNum')->default(1)->rules('required')->help('多进程设置, 如果大于1需要配合redis使用,供进程间共享使用');
-            $form->radio('log_show')->options([0 => 'False', 1 => 'True'])->help('当使用cli命令调用的时候会显示日志');
-            $form->radio('multiserver')->options([0 => 'False', 1 => 'True'])->help('多服务器处理,需要配合redis来保存采集任务数据，供多服务器共享数据使用');
+            // $form->radio('log_show')->options([0 => 'False', 1 => 'True'])->help('当使用cli命令调用的时候会显示日志');
+            // $form->radio('multiserver')->options([0 => 'False', 1 => 'True'])->help('多服务器处理,需要配合redis来保存采集任务数据，供多服务器共享数据使用');
         });
         $form->tab('Scan Settings', function ($form) {
             $form->html('定义爬虫爬取哪些域名下的网页, 非域名下的url会被忽略以提高爬取速度');
@@ -102,20 +103,40 @@ name
 selector
 定义抽取规则, 默认使用xpath
 selector_type
-抽取规则的类型目前可用xpath, jsonpath, regex
+抽取规则的类型目前可用xpath, css selector, regex
 默认xpath
 </pre>');
             $form->table('fields', 'Field', function ($table) use ($type) {
                 $table->text('name');
                 $table->text('selector');
                 $table->select('selector_type')->options($type)->default('xpath');
+                $table->radio('required')->options([0 => 'false', 1 => 'true'])->default(1);
             });
+        });
+        $form->tab('Queue Config', function ($form) {
+            $form->embeds('queue_config', 'Queue Config', function ($form) {
+                $form->text('host');
+                $form->text('port')->default(6379);
+                $form->text('pass');
+                $form->number('db')->default(1);
+                $form->text('prefix')->default('phpspider');
+                $form->text('timeout')->default(30);
+            });
+        });
+
+        $form->tab('CallBack Config', function ($form) {
+            $form->html('
+<pre>
+每个标签代表对应的回调函数的操作
+//todo
+</pre>');
         });
         return $form;
     }
     
-    public function store(Request $request)
-    {
-        dd($request->all());
-    }
+    // public function store(Request $request)
+    // {
+    //     // dd($request->all());
+       
+    // }
 }

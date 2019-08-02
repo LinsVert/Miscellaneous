@@ -16,6 +16,9 @@ class TestCommand extends Command
     }
 
     public function handle() {
+        $ip_cmd = "ifconfig eth0 | sed -n '/inet addr/p' | awk '{print $2}' | awk -F ':' '{print $2}'";
+$ret = trim(exec($ip_cmd));
+dd($ret);
         echo time();
     }
 }

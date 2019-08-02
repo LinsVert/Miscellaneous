@@ -5,9 +5,27 @@ namespace Linsvert\Spider\Logic;
 use Cron\CronExpression;
 use Linsvert\Spider\Utils\Spider;
 use Linsvert\Spider\Http\Models\TaskModel;
+use Illuminate\Console\Scheduling\ManagesFrequencies;
 
 class TaskLogic
 {
+    //时间解析器
+    use ManagesFrequencies;
+
+    /**
+     * The cron expression representing the event's frequency.
+     *
+     * @var string
+     */
+    public $expression = '* * * * *';
+
+        /**
+     * The timezone the date should be evaluated on.
+     *
+     * @var \DateTimeZone|string
+     */
+    public $timezone;
+
     public static function start()
     {
         //基本逻辑
@@ -48,10 +66,17 @@ class TaskLogic
      
     protected static function runSpider(TaskModel $taskModel)
     {
-        echo 'Start spider task name :' . $taskModel->name . ' spider name :' . $taskModel->spider->spider_name . ' task id:' . $taskModel->id;
+        echo 'Start spider task name :' . $taskModel->name . PHP_EOL . 'Spider name :' . $taskModel->spider->spider_name . ' task id : ' . $taskModel->id . PHP_EOL;
         //查看调度命令检测使用 https://github.com/dragonmantank/cron-expression
-        $isDue = CronExpression::factory($taskModel->crontab)->isDue('now', $taskModel->timeZone);
+        $_self = new self;
+        if (method_exists($_self, $taskModel->crontab)) {
+            $_self->{$taskModel->crontab}();
+        } else {
+            //不存在默认设置成day
+        }
+        $isDue = CronExpression::factory($_self->expression)->isDue('now', $taskModel->timeZone ?: null);
         if ($isDue == false) {
+            echo 'time not over' . PHP_EOL;
             return false;
         }
         //如果可以运行 获取爬虫配置 调度

@@ -10,7 +10,7 @@ class TaskModel extends Model
     
     public function spider()
     {
-        return $this->hasOne(SpiderModel::class, 'spider_id', 'id');
+        return $this->hasOne(SpiderModel::class, 'id', 'spider_id');
     }
     
 }
